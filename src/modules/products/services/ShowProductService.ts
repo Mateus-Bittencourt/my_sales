@@ -1,6 +1,6 @@
 import AppError from '@shared/erros/AppError'
-import { productsRepositories } from '../repositories/ProductsRepositories'
-import { Product } from '../entities/Product'
+import { productsRepositories } from '../database/repositories/ProductsRepositories'
+import { Product } from '../database/entities/Product'
 
 interface IShowProduct {
   id: number
