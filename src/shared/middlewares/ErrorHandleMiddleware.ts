@@ -16,6 +16,6 @@ export default class ErrorHandleMiddleware {
 
     return response
       .status(500)
-      .json({ type: 'error', message: 'Internal server error' })
+      .json({ type: 'error', message: 'Internal server error.' })
   }
 }
