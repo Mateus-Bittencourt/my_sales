@@ -2,7 +2,7 @@ import AppError from '@shared/erros/AppError'
 import { User } from '../database/entities/User'
 import { usersRepositories } from '../database/repositories/UsersRepositories'
 import { compare } from 'bcrypt'
-import { sign } from 'jsonwebtoken'
+import { Secret, sign } from 'jsonwebtoken'
 
 interface ISessionUser {
   email: string
@@ -25,7 +25,7 @@ export default class SessionUserService {
     const passwordConfirmed = await compare(password, user.password)
     if (!passwordConfirmed) throw new AppError('Invalid Email/password.', 401)
 
-    const token = sign({}, process.env.app_secret, {
+    const token = sign({}, process.env.app_secret as Secret, {
       subject: String(user.id),
       expiresIn: '1d',
     })
