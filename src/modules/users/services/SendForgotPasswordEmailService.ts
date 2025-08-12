@@ -1,6 +1,6 @@
-import AppError from "@shared/erros/AppError"
-import { usersRepositories } from "../database/repositories/UsersRepositories"
-import { userTokensRepositories } from "../database/repositories/UserTokensRepositories"
+import AppError from '@shared/erros/AppError'
+import { usersRepositories } from '../database/repositories/UsersRepositories'
+import { userTokensRepositories } from '../database/repositories/UserTokensRepositories'
 
 interface IForgotPassword {
   email: string
