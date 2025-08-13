@@ -2,8 +2,8 @@ import { Router } from 'express'
 import SendForgotPasswordController from '../controllers/SendForgotPasswordController'
 import ResetForgotPasswordController from '../controllers/ResetPasswordController'
 import {
-  ForgetPasswordSchema,
-  ResetPasswordSchema,
+  forgetPasswordSchema,
+  resetPasswordSchema,
 } from '../schemas/PasswordSchemas'
 
 const passwordRouter = Router()
@@ -12,12 +12,12 @@ const resetForgotPasswordController = new ResetForgotPasswordController()
 
 passwordRouter.post(
   '/forgot',
-  ForgetPasswordSchema,
+  forgetPasswordSchema,
   sendForgotPasswordController.create
 )
 passwordRouter.post(
   '/reset',
-  ResetPasswordSchema,
+  resetPasswordSchema,
   resetForgotPasswordController.create
 )
 
