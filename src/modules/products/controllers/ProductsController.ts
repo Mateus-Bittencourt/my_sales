@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import ListProductsService from '../services/ListProductsService'
 import ShowProductService from '../services/ShowProductService'
 import CreateProductService from '../services/CreateProductService'
-import UpdateProductService from '../services/UpdateProduct'
+import UpdateProductService from '../services/UpdateProductService'
 import DeleteProductService from '../services/DeleteProductService'
 
 export default class ProductsController {
