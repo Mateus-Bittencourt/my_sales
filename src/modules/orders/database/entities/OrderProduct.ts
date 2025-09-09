@@ -14,13 +14,19 @@ export class OrderProduct {
   @PrimaryGeneratedColumn('increment')
   id: number
 
-  @ManyToOne(() => Order, (order) => order.order_product, { eager: true })
+  @ManyToOne(() => Order, (order) => order.order_products)
   @JoinColumn({ name: 'order_id' })
   order: Order
 
-  @ManyToOne(() => Product, (product) => product.order_product, { eager: true })
+  @Column()
+  order_id: number
+
+  @ManyToOne(() => Product, (product) => product.order_product)
   @JoinColumn({ name: 'product_id' })
   product: Product
+
+  @Column()
+  product_id: number
 
   @Column('decimal', { precision: 10, scale: 2 })
   price: number

@@ -20,9 +20,8 @@ export class Order {
 
   @OneToMany(() => OrderProduct, (orderProduct) => orderProduct.order, {
     cascade: true,
-    eager: true,
   })
-  order_product: OrderProduct[]
+  order_products: OrderProduct[]
 
   @CreateDateColumn()
   created_at: Date
