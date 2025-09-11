@@ -4,7 +4,7 @@ import { Order } from '../database/entities/Order'
 import { customersRepositories } from '@modules/customers/database/repositories/CustomersRepositories'
 import { productsRepositories } from '@modules/products/database/repositories/ProductsRepositories'
 import { ordersRepository } from '../database/repositories/OrdersRepositories'
-import { In } from 'typeorm'
+// import { In } from 'typeorm'
 
 interface ICreateOrder {
   customerId: number
@@ -60,7 +60,7 @@ export default class CreateOrderService {
     const { order_products } = order
 
     const updatedProductsQuantities = order_products.map(product => ({
-      product_id: product.product_id,
+      id: product.product_id,
       quantity:
         existingProductsMap.get(product.product_id)!.quantity -
         product.quantity,
