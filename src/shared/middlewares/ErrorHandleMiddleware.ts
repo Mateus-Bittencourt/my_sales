@@ -9,7 +9,7 @@ export default class ErrorHandleMiddleware {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _next: NextFunction
   ) {
-    console.error(error)
+    console.error(`\n\nError: ${error.message}\n\n`)
 
     if (error instanceof AppError)
       return response

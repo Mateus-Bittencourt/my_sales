@@ -11,7 +11,7 @@ interface ITokenPayload {
 export default class AuthMiddleware {
   static execute(
     request: Request,
-    response: Response,
+    _response: Response,
     next: NextFunction
   ): void {
     const authHeader = request.headers.authorization
@@ -26,7 +26,7 @@ export default class AuthMiddleware {
       const { sub } = decodedToken as ITokenPayload
 
       request.user = {
-        id: sub,
+        id: Number(sub),
       }
 
       return next()
