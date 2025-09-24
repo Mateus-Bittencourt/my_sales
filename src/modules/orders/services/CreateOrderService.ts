@@ -1,6 +1,5 @@
 import { Product } from '@modules/products/database/entities/Product'
 import AppError from '@shared/erros/AppError'
-import { Order } from '../database/entities/Order'
 import { customersRepositories } from '@modules/customers/database/repositories/CustomersRepositories'
 import { productsRepositories } from '@modules/products/database/repositories/ProductsRepositories'
 import { ordersRepository } from '../database/repositories/OrdersRepositories'
@@ -27,6 +26,24 @@ interface IValidateReturn {
   existingProductsMap: Map<number, Product>
 }
 
+interface ICreateOrderResponse {
+  id: number
+  customer: {
+    id: number
+    name: string
+  }
+  order_products: Array<{
+    id: number
+    price: number
+    quantity: number
+    product: {
+      id: number
+      name: string
+      price: number
+    }
+  }>
+}
+
 export default class CreateOrderService {
   constructor(
     private readonly ordersRepo = ordersRepository,
@@ -34,7 +51,10 @@ export default class CreateOrderService {
     private readonly customersRepo = customersRepositories
   ) {}
 
-  async execute({ customerId, products }: ICreateOrder): Promise<Order> {
+  async execute({
+    customerId,
+    products,
+  }: ICreateOrder): Promise<ICreateOrderResponse> {
     const { customer, order_products, existingProductsMap } =
       await this.validate({ customerId, products })
 
@@ -53,28 +73,35 @@ export default class CreateOrderService {
       )
 
       return {
-        ...created,
-        customer,
+        id: created.id,
+        customer: {
+          id: customer.id,
+          name: customer.name,
+        },
         order_products: created.order_products.map(op => ({
-          ...op,
-          product: existingProductsMap.get(op.product_id)!,
+          id: op.id,
+          price: op.price,
+          quantity: op.quantity,
+          product: {
+            id: op.product_id,
+            name: existingProductsMap.get(op.product_id)!.name,
+            price: existingProductsMap.get(op.product_id)!.price,
+          },
         })),
-      } as unknown as Order
+      }
     })
   }
 
-  private async validate({ customerId, products }: ICreateOrder): Promise<IValidateReturn> {
-    if (!products?.length)
-      throw new AppError('Products are required to create an order.', 400)
-
+  private async validate({
+    customerId,
+    products,
+  }: ICreateOrder): Promise<IValidateReturn> {
+    //
     const requestedById = new Map<number, number>()
-    for (const { id, quantity } of products) {
-      if (!id || !quantity)
-        throw new AppError('Invalid product payload.', 400)
-      if (quantity <= 0)
-        throw new AppError('Product quantity must be greater than zero.', 400)
+
+    for (const { id, quantity } of products)
       requestedById.set(id, (requestedById.get(id) ?? 0) + quantity)
-    }
+
 
     const customer = await this.customersRepo.findById(customerId)
     if (!customer)
@@ -103,16 +130,12 @@ export default class CreateOrderService {
     const order_products = productIds.map(id => ({
       product_id: id,
       quantity: requestedById.get(id)!,
-      price: Number(existingProductsMap.get(id)!.price),
+      price: Number(existingProductsMap.get(id)!.price) * requestedById.get(id)!,
     }))
 
     return { customer, order_products, existingProductsMap }
   }
 }
-
-
-
-
 
 // export default class CreateOrderService {
 //   async execute({ customerId, products }: ICreateOrder): Promise<Order> {

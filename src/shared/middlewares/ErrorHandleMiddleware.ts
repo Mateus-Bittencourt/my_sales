@@ -10,6 +10,14 @@ export default class ErrorHandleMiddleware {
     _next: NextFunction
   ) {
     console.error(`\n\nError: ${error.message}\n\n`)
+    if (process.env.NODE_ENV === 'development')
+      console.error(`${error.stack}\n\n`)
+
+    if (error instanceof SyntaxError && error.message.includes('JSON'))
+      return response.status(400).json({
+        type: 'error',
+        message: 'Invalid JSON format. Please check your request body.',
+      })
 
     if (error instanceof AppError)
       return response
