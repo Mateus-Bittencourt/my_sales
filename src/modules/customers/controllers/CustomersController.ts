@@ -6,8 +6,13 @@ import UpdateCustomerService from '../services/UpdateCustomerService'
 import DeleteCustomerService from '../services/DeleteCustomerService'
 
 export default class CustomersController {
-  index = async (_request: Request, response: Response): Promise<Response> =>
-    response.json(await new ListCustomersService().execute())
+  index = async (request: Request, response: Response): Promise<Response> =>
+    response.json(
+      await new ListCustomersService().execute({
+        page: Number(request.query.page) || 1,
+        limit: Number(request.query.limit) || 10,
+      })
+    )
 
   show = async (request: Request, response: Response): Promise<Response> =>
     response.json(
