@@ -1,5 +1,4 @@
 import AppError from '@shared/erros/AppError'
-import { User } from '../database/entities/User'
 import { usersRepositories } from '../database/repositories/UsersRepositories'
 import { compare } from 'bcrypt'
 import { Secret, sign } from 'jsonwebtoken'
@@ -10,7 +9,6 @@ interface ISessionUser {
 }
 
 interface ISessionResponse {
-  user: User
   token: string
 }
 
@@ -31,7 +29,6 @@ export default class SessionUserService {
     })
 
     return {
-      user,
       token,
     }
   }

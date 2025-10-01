@@ -4,6 +4,7 @@ import { usersRepositories } from '../database/repositories/UsersRepositories'
 import path from 'path'
 import uploadConfig from '@config/upload'
 import fs from 'fs'
+import { instanceToInstance } from 'class-transformer'
 
 interface IUpdateUserAvatar {
   userId: number
@@ -23,6 +24,6 @@ export default class UpdateUserAvatarService {
 
     user.avatar = avatarFileName
     await usersRepositories.save(user)
-    return user
+    return instanceToInstance(user)
   }
 }

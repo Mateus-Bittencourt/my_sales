@@ -2,6 +2,7 @@ import AppError from '@shared/erros/AppError'
 import { User } from '../database/entities/User'
 import { usersRepositories } from '../database/repositories/UsersRepositories'
 import { hash } from 'bcrypt'
+import { instanceToInstance } from 'class-transformer'
 
 interface ICreateUser {
   name: string
@@ -25,6 +26,6 @@ export default class CreateUserService {
 
     await usersRepositories.save(user)
 
-    return user
+    return instanceToInstance(user)
   }
 }

@@ -9,13 +9,17 @@ interface IUploadConfig {
 
 const uploadFolder = path.resolve(__dirname, '..', '..', 'uploads')
 
+const sanitizeFileName = (fileName: string): string =>
+  fileName.replace(/[^a-zA-Z0-9.-]/g, '')
+
 export default {
   directory: uploadFolder,
   storage: multer.diskStorage({
     destination: uploadFolder,
     filename(_request, file, callback) {
       const fileHash = crypto.randomBytes(10).toString('hex')
-      const fileName = `${fileHash}-${file.originalname}`
+      const sanitizedName = sanitizeFileName(file.originalname)
+      const fileName = `${fileHash}-${sanitizedName}`
 
       return callback(null, fileName)
     },

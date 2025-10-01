@@ -1,6 +1,7 @@
 import AppError from '@shared/erros/AppError'
 import { usersRepositories } from '../database/repositories/UsersRepositories'
 import { User } from '../database/entities/User'
+import { instanceToInstance } from 'class-transformer'
 
 interface IShowProfile {
   userId: number
@@ -11,6 +12,6 @@ export default class ShowProfileService {
     const user = await usersRepositories.findById(userId)
     if (!user) throw new AppError('User not found.', 404)
 
-    return user
+    return instanceToInstance(user)
   }
 }
