@@ -1,3 +1,4 @@
+import RedisCache from '@shared/cache/RedisCache'
 import { RedisOptions } from 'ioredis'
 
 interface ICacheConfig {
@@ -17,3 +18,5 @@ export default {
     },
   },
 } as ICacheConfig
+
+export const redisCache = new RedisCache()

@@ -1,6 +1,7 @@
 import AppError from '@shared/erros/AppError'
 import { Product } from '../database/entities/Product'
 import { productsRepositories } from '../database/repositories/ProductsRepositories'
+import { redisCache } from '@config/cache'
 
 interface ICreateProduct {
   name: string
@@ -18,6 +19,7 @@ export default class CreateProductService {
     const product = productsRepositories.create({ name, price, quantity })
 
     await productsRepositories.save(product)
+    await redisCache.invalidate('api-mysales-products')
 
     return product
   }
