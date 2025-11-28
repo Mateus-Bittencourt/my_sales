@@ -1,6 +1,6 @@
 import AppError from "@shared/erros/AppError";
-import { Order } from "../database/entities/Order";
-import { ordersRepository } from "../database/repositories/OrdersRepositories";
+import { Order } from "../infra/database/entities/Order";
+import { ordersRepository } from "../infra/database/repositories/OrdersRepositories";
 
 export class ShowOrderService {
   async execute(id: number): Promise<Order> {

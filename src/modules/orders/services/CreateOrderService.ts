@@ -1,10 +1,10 @@
-import { Product } from '@modules/products/database/entities/Product'
+import { Product } from '@modules/products/infra/database/entities/Product'
 import AppError from '@shared/erros/AppError'
-import { customersRepositories } from '@modules/customers/database/repositories/CustomersRepositories'
-import { productsRepositories } from '@modules/products/database/repositories/ProductsRepositories'
-import { ordersRepository } from '../database/repositories/OrdersRepositories'
-import { AppDataSource } from '@shared/typeorm/data-source'
-import { Customer } from '@modules/customers/database/entities/Customer'
+import { customersRepositories } from '@modules/customers/infra/database/repositories/CustomersRepositories'
+import { productsRepositories } from '@modules/products/infra/database/repositories/ProductsRepositories'
+import { ordersRepository } from '../infra/database/repositories/OrdersRepositories'
+import { AppDataSource } from '@shared/infra/typeorm/data-source'
+import { Customer } from '@modules/customers/infra/database/entities/Customer'
 
 interface IOrderProductInput {
   id: number

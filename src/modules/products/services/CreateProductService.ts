@@ -1,6 +1,6 @@
 import AppError from '@shared/erros/AppError'
-import { Product } from '../database/entities/Product'
-import { productsRepositories } from '../database/repositories/ProductsRepositories'
+import { Product } from '../infra/database/entities/Product'
+import { productsRepositories } from '../infra/database/repositories/ProductsRepositories'
 import { redisCache } from '@config/cache'
 
 interface ICreateProduct {

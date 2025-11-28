@@ -1,5 +1,5 @@
 import AppError from '@shared/erros/AppError'
-import { usersRepositories } from '../database/repositories/UsersRepositories'
+import { usersRepositories } from '../infra/database/repositories/UsersRepositories'
 import { compare } from 'bcrypt'
 import { Secret, sign } from 'jsonwebtoken'
 

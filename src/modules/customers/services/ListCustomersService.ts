@@ -1,4 +1,4 @@
-import { customersRepositories } from '../database/repositories/CustomersRepositories'
+import { customersRepositories } from '../infra/database/repositories/CustomersRepositories'
 import { IResponse, IPageOptions } from '@shared/interfaces/response.interface'
 
 interface ICustomerDTO {
