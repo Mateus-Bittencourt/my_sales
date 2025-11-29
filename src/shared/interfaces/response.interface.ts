@@ -11,6 +11,6 @@ export interface IResponse<T> {
 }
 
 export interface IPageOptions {
-  page?: number
-  limit?: number
+  page: number
+  limit: number
 }

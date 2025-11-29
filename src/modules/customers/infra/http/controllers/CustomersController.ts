@@ -4,24 +4,27 @@ import ShowCustomerService from '../../../services/ShowCustomerService'
 import CreateCustomerService from '../../../services/CreateCustomerService'
 import UpdateCustomerService from '../../../services/UpdateCustomerService'
 import DeleteCustomerService from '../../../services/DeleteCustomerService'
+import { container } from 'tsyringe'
 
 export default class CustomersController {
   index = async (request: Request, response: Response): Promise<Response> =>
     response.json(
-      await new ListCustomersService().execute({
-        page: Number(request.query.page) || 1,
-        limit: Number(request.query.limit) || 10,
+      await container.resolve(ListCustomersService).execute({
+        page: Number(request.query.page),
+        limit: Number(request.query.limit),
       })
     )
 
   show = async (request: Request, response: Response): Promise<Response> =>
     response.json(
-      await new ShowCustomerService().execute({ id: Number(request.params.id) })
+      await container
+        .resolve(ShowCustomerService)
+        .execute({ id: Number(request.params.id) })
     )
 
   create = async (request: Request, response: Response): Promise<Response> =>
     response.status(201).json(
-      await new CreateCustomerService().execute({
+      await container.resolve(CreateCustomerService).execute({
         name: request.body.name,
         email: request.body.email,
       })
@@ -29,7 +32,7 @@ export default class CustomersController {
 
   update = async (request: Request, response: Response): Promise<Response> =>
     response.json(
-      await new UpdateCustomerService().execute({
+      await container.resolve(UpdateCustomerService).execute({
         id: Number(request.params.id),
         name: request.body.name,
         email: request.body.email,
@@ -37,7 +40,9 @@ export default class CustomersController {
     )
 
   delete = async (request: Request, response: Response): Promise<void> => {
-    await new DeleteCustomerService().execute({ id: Number(request.params.id) })
+    await container
+      .resolve(DeleteCustomerService)
+      .execute({ id: Number(request.params.id) })
     response.status(204).send()
   }
 }

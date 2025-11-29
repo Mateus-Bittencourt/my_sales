@@ -7,6 +7,8 @@ import routes from './routes'
 import ErrorHandleMiddleware from '@shared/middlewares/ErrorHandleMiddleware'
 import { AppDataSource } from '@shared/infra/typeorm/data-source'
 import rateLimiter from '@shared/middlewares/rateLimiter'
+import 'reflect-metadata'
+import '@shared/containers'
 
 async function startServer() {
   try {

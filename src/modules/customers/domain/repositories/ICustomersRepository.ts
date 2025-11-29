@@ -7,6 +7,7 @@ export interface Pagination {
 }
 
 export interface ICustomersRepository {
+  findAll(): Promise<ICustomer[]>
   findAndCount(pagination: Pagination): Promise<[ICustomer[], number]>
   findById(id: number): Promise<ICustomer | null>
   findByEmail(email: string): Promise<ICustomer | null>
