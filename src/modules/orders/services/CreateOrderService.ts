@@ -1,6 +1,6 @@
 import { Product } from '@modules/products/infra/database/entities/Product'
 import AppError from '@shared/erros/AppError'
-import { customersRepositories } from '@modules/customers/infra/database/repositories/CustomersRepositories'
+import { customersRepository } from '@modules/customers/infra/database/repositories/CustomersRepository'
 import { productsRepositories } from '@modules/products/infra/database/repositories/ProductsRepositories'
 import { ordersRepository } from '../infra/database/repositories/OrdersRepositories'
 import { AppDataSource } from '@shared/infra/typeorm/data-source'
@@ -48,7 +48,7 @@ export default class CreateOrderService {
   constructor(
     private readonly ordersRepo = ordersRepository,
     private readonly productsRepo = productsRepositories,
-    private readonly customersRepo = customersRepositories
+    private readonly customersRepo = customersRepository
   ) {}
 
   async execute({

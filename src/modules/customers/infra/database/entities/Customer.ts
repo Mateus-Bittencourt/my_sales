@@ -5,9 +5,10 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
+import { ICustomer } from '../../../domain/models/ICustomer'
 
 @Entity('customers')
-export class Customer {
+export class Customer implements ICustomer {
   @PrimaryGeneratedColumn()
   id: number
 
@@ -17,9 +18,9 @@ export class Customer {
   @Column({ type: 'text' })
   email: string
 
-  @CreateDateColumn({ type: 'timestamp' })
-  created_at: Date
+  @CreateDateColumn({ type: 'timestamp', name: 'created_at' })
+  createdAt: Date
 
-  @UpdateDateColumn({ type: 'timestamp' })
-  updated_at: Date
+  @UpdateDateColumn({ type: 'timestamp', name: 'updated_at' })
+  updatedAt: Date
 }

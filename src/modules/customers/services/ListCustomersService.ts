@@ -1,5 +1,5 @@
-import { customersRepositories } from '../infra/database/repositories/CustomersRepositories'
 import { IResponse, IPageOptions } from '@shared/interfaces/response.interface'
+import { ICustomersRepository } from '../domain/repositories/ICustomersRepository'
 
 interface ICustomerDTO {
   id: number
@@ -8,16 +8,15 @@ interface ICustomerDTO {
 }
 
 export default class ListCustomersService {
-  constructor(private readonly customersRepo = customersRepositories) {}
+  constructor(private readonly customersRepository: ICustomersRepository) {}
 
   async execute({
     page = 1,
     limit = 10,
   }: IPageOptions): Promise<IResponse<ICustomerDTO[]>> {
-    const [data, total] = await this.customersRepo.findAndCount({
+    const [data, total] = await this.customersRepository.findAndCount({
       skip: (page - 1) * limit,
       take: limit,
-      order: { name: 'ASC' },
     })
 
     return {
