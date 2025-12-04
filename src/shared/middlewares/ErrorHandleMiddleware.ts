@@ -9,9 +9,9 @@ export default class ErrorHandleMiddleware {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _next: NextFunction
   ) {
-    console.error(`\n\nError: ${error.message}\n\n`)
+    console.error(`\nError message: ${error.message}\n`)
     if (process.env.NODE_ENV === 'development')
-      console.error(`${error.stack}\n\n`)
+      console.error(`Error stack: ${error.stack}\n`)
 
     if (error instanceof SyntaxError && error.message.includes('JSON'))
       return response.status(400).json({
