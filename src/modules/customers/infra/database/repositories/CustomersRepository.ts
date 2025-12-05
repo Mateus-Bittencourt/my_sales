@@ -15,12 +15,13 @@ export default class CustomersRepository implements ICustomersRepository {
     this.ormRepository = AppDataSource.getRepository(Customer)
   }
 
-  public async findAndCount(
-    pagination: Pagination
-  ): Promise<[ICustomer[], number]> {
+  public async findAndCount({
+    take,
+    skip,
+  }: Pagination): Promise<[ICustomer[], number]> {
     return this.ormRepository.findAndCount({
-      take: pagination.take,
-      skip: pagination.skip,
+      take,
+      skip,
     })
   }
 

@@ -16,12 +16,12 @@ export class UserToken {
   @Generated('uuid')
   token: string
 
-  @Column({ type: 'integer' })
-  user_id: number
+  @Column({ type: 'integer', name: 'user_id' })
+  userId: number
 
-  @CreateDateColumn({ type: 'timestamp' })
-  created_at: Date
+  @CreateDateColumn({ type: 'timestamp', name: 'created_at' })
+  createdAt: Date
 
-  @UpdateDateColumn({ type: 'timestamp' })
-  updated_at: Date
+  @UpdateDateColumn({ type: 'timestamp', name: 'updated_at' })
+  updatedAt: Date
 }

@@ -26,16 +26,15 @@ export class User {
   @Exclude()
   avatar: string
 
-  @CreateDateColumn({ type: 'timestamp' })
-  created_at: Date
+  @CreateDateColumn({ type: 'timestamp', name: 'created_at' })
+  createdAt: Date
 
-  @UpdateDateColumn({ type: 'timestamp' })
-  updated_at: Date
+  @UpdateDateColumn({ type: 'timestamp', name: 'updated_at' })
+  updatedAt: Date
 
   @Expose({ name: 'avatar_url' })
   getAvatarUrl(): string | null {
     if (!this.avatar) return null
     return `${process.env.app_api_url}/uploads/${this.avatar}`
   }
-
 }
