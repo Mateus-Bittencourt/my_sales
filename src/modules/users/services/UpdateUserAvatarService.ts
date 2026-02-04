@@ -1,6 +1,6 @@
 import AppError from '@shared/erros/AppError'
 import { User } from '../infra/database/entities/User'
-import { usersRepositories } from '../infra/database/repositories/UsersRepositories'
+import { usersRepositories } from '../infra/database/repositories/UsersRepository'
 import path from 'path'
 import uploadConfig from '@config/upload'
 import fs from 'fs'

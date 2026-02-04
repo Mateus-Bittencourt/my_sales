@@ -1,23 +1,24 @@
 import AppError from '@shared/erros/AppError'
-import { usersRepositories } from '../infra/database/repositories/UsersRepositories'
 import { compare } from 'bcrypt'
 import { Secret, sign } from 'jsonwebtoken'
+import { inject, injectable } from 'tsyringe'
+import { ISessionResponse } from '../domain/models/ISessionResponse'
+import { ISessionUser } from '../domain/models/ISessionUser'
+import { IUsersRepository } from '../domain/repositories/IUsersRepository'
 
-interface ISessionUser {
-  email: string
-  password: string
-}
-
-interface ISessionResponse {
-  token: string
-}
-
+@injectable()
 export default class SessionUserService {
+  constructor(
+    @inject('UsersRepository')
+    private readonly usersRepository: IUsersRepository
+  ) {}
+
+
   async execute({ email, password }: ISessionUser): Promise<ISessionResponse> {
     if (!process.env.app_secret)
       throw new AppError('FATAL_ERROR: JWT Secret not defined.')
 
-    const user = await usersRepositories.findByEmail(email)
+    const user = await this.usersRepository.findByEmail(email)
     if (!user) throw new AppError('Invalid Email/password.', 401)
 
     const passwordConfirmed = await compare(password, user.password)

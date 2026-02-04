@@ -26,6 +26,10 @@ export default class UsersRepository implements IUsersRepository {
     this.ormRepository = AppDataSource.getRepository(User)
   }
 
+  public async findAll(): Promise<IUser[]> {
+    return this.ormRepository.find()
+  }
+
   public async create(data: ICreateUser): Promise<IUser> {
     const entity = this.ormRepository.create(data)
     return this.ormRepository.save(entity)

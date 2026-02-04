@@ -1,5 +1,5 @@
 import AppError from '@shared/erros/AppError'
-import { usersRepositories } from '../infra/database/repositories/UsersRepositories'
+import { usersRepositories } from '../infra/database/repositories/UsersRepository'
 import { User } from '../infra/database/entities/User'
 import { instanceToInstance } from 'class-transformer'
 

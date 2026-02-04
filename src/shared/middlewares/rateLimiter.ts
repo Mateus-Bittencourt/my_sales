@@ -5,7 +5,7 @@ import { createClient } from 'redis'
 
 const redisClient = createClient({
   url: `redis://${process.env.redis_host}:${process.env.redis_port}`,
-  password: process.env.redis_password || undefined,
+  password: process.env.redis_pass || undefined,
 })
 
 redisClient.connect().catch(console.error)

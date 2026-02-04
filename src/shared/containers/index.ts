@@ -1,8 +1,15 @@
 import { container } from 'tsyringe'
 import { ICustomersRepository } from '@modules/customers/domain/repositories/ICustomersRepository'
 import CustomersRepository from '@modules/customers/infra/database/repositories/CustomersRepository'
+import { IUsersRepository } from '@modules/users/domain/repositories/IUsersRepository'
+import UsersRepository from '@modules/users/infra/database/repositories/UsersRepository'
 
 container.registerSingleton<ICustomersRepository>(
   'CustomersRepository',
   CustomersRepository
+)
+
+container.registerSingleton<IUsersRepository>(
+  'UsersRepository',
+  UsersRepository
 )

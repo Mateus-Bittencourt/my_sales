@@ -7,7 +7,7 @@ export interface Pagination {
 }
 
 export interface IUsersRepository {
-  // findAll(): Promise<IUser[]>
+  findAll(): Promise<IUser[]>
   findById(id: number): Promise<IUser | null>
   findByEmail(email: string): Promise<IUser | null>
   // findAndCount(pagination: Pagination): Promise<[IUser[], number]>

@@ -10,7 +10,7 @@ export default class ErrorHandleMiddleware {
     _next: NextFunction
   ) {
     console.error(`\nError message: ${error.message}\n`)
-    if (process.env.NODE_ENV === 'development')
+    if (process.env.node_env === 'development')
       console.error(`Error stack: ${error.stack}\n`)
 
     if (error instanceof SyntaxError && error.message.includes('JSON'))

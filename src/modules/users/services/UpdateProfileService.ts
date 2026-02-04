@@ -1,6 +1,6 @@
 import AppError from '@shared/erros/AppError'
 import { User } from '../infra/database/entities/User'
-import { usersRepositories } from '../infra/database/repositories/UsersRepositories'
+import { usersRepositories } from '../infra/database/repositories/UsersRepository'
 import { compare, hash } from 'bcrypt'
 import { instanceToInstance } from 'class-transformer'
 
