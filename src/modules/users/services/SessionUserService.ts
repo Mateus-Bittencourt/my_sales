@@ -9,6 +9,7 @@ import { IUsersRepository } from '../domain/repositories/IUsersRepository'
 @injectable()
 export default class SessionUserService {
   constructor(
+    // @ts-ignore
     @inject('UsersRepository')
     private readonly usersRepository: IUsersRepository
   ) {}

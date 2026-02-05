@@ -9,6 +9,7 @@ import { ICreateUser } from '../domain/models/ICreateUser'
 @injectable()
 export default class CreateUserService {
   constructor(
+    // @ts-ignore
     @inject('UsersRepository')
     private readonly usersRepository: IUsersRepository
   ) {}

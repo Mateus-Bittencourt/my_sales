@@ -6,6 +6,7 @@ import { IUser } from '../domain/models/IUser'
 @injectable()
 export default class ListUsersService {
   constructor(
+    // @ts-ignore
     @inject('UsersRepository')
     private readonly usersRepository: IUsersRepository
   ) {}
